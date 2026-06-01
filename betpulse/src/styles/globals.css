@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --gold: #f59e0b;
+  --gold-light: #fbbf24;
+  --gold-dim: rgba(245, 158, 11, 0.15);
+  --obsidian: #0a0a0f;
+  --surface: #111118;
+  --surface-2: #1a1a24;
+  --surface-3: #22222f;
+  --text-primary: #f5f5f0;
+  --text-muted: #8888a0;
+  --border: rgba(255, 255, 255, 0.08);
+  --red-accent: #ef4444;
+  --green-accent: #22c55e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--obsidian);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--obsidian); }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Selection */
+::selection { background: var(--gold-dim); color: var(--gold-light); }
+
+/* Typography */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Gold shimmer text */
+.text-shimmer {
+  background: linear-gradient(90deg, #f59e0b 0%, #fde68a 25%, #f59e0b 50%, #d97706 75%, #f59e0b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Article content styles */
+.article-content h2 {
+  font-size: 1.75rem;
+  margin: 2.5rem 0 1rem;
+  color: var(--gold-light);
+}
+.article-content h3 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.75rem;
+  color: var(--text-primary);
+}
+.article-content p {
+  margin-bottom: 1.5rem;
+  color: #ccccd8;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.article-content ul, .article-content ol {
+  margin: 1.25rem 0 1.5rem 1.5rem;
+  color: #ccccd8;
+}
+.article-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+.article-content a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-content blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--surface-2);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+.article-content th {
+  background: var(--surface-2);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+}
+.article-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: #ccccd8;
+}
+.article-content tr:hover td { background: var(--surface-2); }
+
+/* Rating stars */
+.stars { color: var(--gold); letter-spacing: 2px; }
+
+/* Bet badge */
+.bet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Glow button */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
+  color: #0a0a0f;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  font-family: var(--font-body);
+}
+.btn-ghost:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  color: var(--gold);
+}
+
+/* Gradient line */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Animated number */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+.delay-100 { animation-delay: 0.1s; opacity: 0; }
+.delay-200 { animation-delay: 0.2s; opacity: 0; }
+.delay-300 { animation-delay: 0.3s; opacity: 0; }
+.delay-400 { animation-delay: 0.4s; opacity: 0; }
+.delay-500 { animation-delay: 0.5s; opacity: 0; }
+
+/* Responsible gambling banner */
+.rg-banner {
+  background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.05));
+  border: 1px solid rgba(239,68,68,0.2);
+}
